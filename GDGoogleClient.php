@@ -45,7 +45,11 @@ class GDGoogleCLient{
         return $results->getItems();
     }
 
-    //update events
+    /**
+     * Funcao para atualizar um evento
+     * 
+     * @return Obj objeto do evento atualizado
+     */
     public function updateEvents($body){
 
         $this->id_event = $body['event_id'];
@@ -53,13 +57,20 @@ class GDGoogleCLient{
         if(!$this->calendar){
             $this->setCalendar($this->calendar_id);
         }
-
-        $event = $this->calendar->events->get($this->calendar_id, $this->id_event);
-
-        $event->setSummary($body['summary']);
-
-        $updateEvent = $this->calendar->events->update($this->calendar_id, $event->getId(), $event);
-
+        //$event->setSummary($body['summary']);
+        //$event->setDescription($body['description']);
+        $optParams = new Google_Service_Calendar_Event(array(
+            'summary' => $body['summary'],
+          //'description' =>  $body['description'],
+            'start' => array('dateTime' => $body['start_datetime'], 'timeZone' => 'America/Sao_Paulo'), 
+            'end' => array('dateTime' => $body['end_datetime'], 'timeZone' => 'America/Sao_Paulo'),
+            'attendees' => array(
+                array('email' => $body['participante_1']),
+                array('email' => $body['participante_2']),
+              ),
+        ));
+        
+        $updateEvent = $this->calendar->events->update($this->calendar_id, $this->id_event, $optParams);
         return $updateEvent;
     }
 
