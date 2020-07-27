@@ -51,7 +51,9 @@ class GDGoogleCLient{
      * @return Obj objeto do evento atualizado
      */
     public function updateEvents($body){
-
+        if(!$this->is_authenticated){
+            throw new Exception("Você precisa autenticar primeiro", 1);            
+        } 
         $this->id_event = $body['event_id'];
 
         if(!$this->calendar){
@@ -80,6 +82,9 @@ class GDGoogleCLient{
      * @return Msg deletado
      */
     public function deleteEvents($body){
+        if(!$this->is_authenticated){
+            throw new Exception("Você precisa autenticar primeiro", 1);            
+        } 
         $this->id_event = $body['event_id'];
 
         if(!$this->calendar){
@@ -89,9 +94,6 @@ class GDGoogleCLient{
 
         return $deletEvent;
     }
-
-
-
     /**
      * Funcao para buscar a url em que o cliente vai autenticar
      * 
