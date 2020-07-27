@@ -74,7 +74,11 @@ class GDGoogleCLient{
         return $updateEvent;
     }
 
-    //delete Events
+    /**
+     * Funcao para deletar um evento
+     * 
+     * @return Msg deletado
+     */
     public function deleteEvents($body){
         $this->id_event = $body['event_id'];
 
