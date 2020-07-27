@@ -1,5 +1,5 @@
 # Calendar_API
-Calendar API 
+Integration with Calendar API 
 
 ```sh
 $ composer install
