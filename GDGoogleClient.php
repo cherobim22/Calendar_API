@@ -82,18 +82,18 @@ class GDGoogleCLient{
      * @return Msg deletado
      */
     public function deleteEvents($body){
-        if(!$this->is_authenticated){
-            throw new Exception("Você precisa autenticar primeiro", 1);            
-        } 
         $this->id_event = $body['event_id'];
-
         if(!$this->calendar){
             $this->setCalendar($this->calendar_id);
         }
-        $deletEvent = $this->calendar->events->delete($this->calendar_id, $this->id_event);
-
-        return $deletEvent;
+        try{
+             $deletEvent = $this->calendar->events->delete($this->calendar_id, $this->id_event);
+             return "deletado";
+        }catch (Exception $e) {
+            echo 'Evento não encontrado: ',  $e->getMessage(), "\n";
+        }
     }
+    
     /**
      * Funcao para buscar a url em que o cliente vai autenticar
      * 
