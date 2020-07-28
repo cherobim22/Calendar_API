@@ -8,7 +8,7 @@ require_once "GDGoogleClient.php";
 
 $gd_client = new GDGoogleCLient;
 
-$gd_client->setToken($_POST);//inserir manual 
+$gd_client->setToken($_POST); 
 $events = $gd_client->getEvents();
 
 echo(json_encode($events));
