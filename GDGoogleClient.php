@@ -45,6 +45,26 @@ class GDGoogleCLient{
         return $results->getItems();
     }
 
+     /**
+     * Funcao para criar um evento
+     * 
+     * @return Obj objeto do evento criado
+     */
+    public function createEvent($body){
+
+        if(!$this->calendar){
+            $this->setCalendar($this->calendar_id);
+        }
+        $this->event =  new Google_Service_Calendar_Event(array(
+            'summary' => $body['summary'],
+            //'description' =>  $body['description'],
+            'start' => array('dateTime' => $body['start_datetime'], 'timeZone' => 'America/Sao_Paulo'), 
+            'end' => array('dateTime' => $body['end_datetime'], 'timeZone' => 'America/Sao_Paulo'),
+        ));
+        $creat_event = $this->calendar->events->insert($this->calendar_id, $this->event);
+        return $creat_event;
+    }
+
     /**
      * Funcao para atualizar um evento
      * 
