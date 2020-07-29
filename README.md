@@ -1,5 +1,6 @@
 # Calendar_API
-Integration with Calendar API 
+Integration with Calendar API.
+Manage Calendars and Events.
 
 ```sh
 $ composer install
