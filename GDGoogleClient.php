@@ -49,9 +49,11 @@ class GDGoogleCLient{
      * @return Obj objeto do evento criado
      */
     public function createEvent($body){
-
+        if(!$this->is_authenticated){
+            throw new Exception("Você precisa autenticar primeiro", 1);            
+        } 
         if(!$this->calendar){
-            $this->setCalendar($this->calendar_id);
+            $this->setCalendar($body['calendar_id']);
         }
         $event = [
             'start' => array('dateTime' => $body['start_datetime'], 'timeZone' => 'America/Sao_Paulo'), 
@@ -68,7 +70,7 @@ class GDGoogleCLient{
             $event['summary'] = $body['summary'];
         }
         $optParams = new Google_Service_Calendar_Event($event);
-        $creat_event = $this->calendar->events->insert($this->calendar_id, $optParams);
+        $creat_event = $this->calendar->events->insert($body['calendar_id'], $optParams);
         return $creat_event;
     }
 
