@@ -4,7 +4,6 @@ Manage Calendars and Events.
 
 ```sh
 $ composer install
-$ composer require google/apiclient:^2.0
 ```
 
 - Calendar - https://developers.google.com/calendar
